@@ -32,19 +32,19 @@ class TurboChargingFragment : SettingsBasePreferenceFragment() {
 
         fun updateSelectedPreference(value: String) {
             prefSlow?.isChecked = value == "4000000"
-            prefMedium?.isChecked = value == "6000000"
-            prefMax?.isChecked = value == "6800000"
+            prefMedium?.isChecked = value == "7500000"
+            prefMax?.isChecked = value == "12500000"
         }
 
-        val currentVal = sharedPrefs.getString("turbo_current", "6800000") ?: "6800000"
+        val currentVal = sharedPrefs.getString("turbo_current", "12500000") ?: "12500000"
         updateSelectedPreference(currentVal)
 
         val listener = Preference.OnPreferenceClickListener { preference ->
             val newValue = when (preference.key) {
                 "turbo_current_slow" -> "4000000"
-                "turbo_current_medium" -> "6000000"
-                "turbo_current_max" -> "6800000"
-                else -> "6800000"
+                "turbo_current_medium" -> "7500000"
+                "turbo_current_max" -> "12500000"
+                else -> "12500000"
             }
             sharedPrefs.edit().putString("turbo_current", newValue).apply()
             updateSelectedPreference(newValue)
@@ -70,7 +70,7 @@ class TurboChargingFragment : SettingsBasePreferenceFragment() {
         Log.i(TAG, "isTurbo=$turboEnabled")
         val defaultValue = "3000000"
         val currentValue = if (turboEnabled) {
-            PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("turbo_current", "6800000") ?: "6800000"
+            PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("turbo_current", "12500000") ?: "12500000"
         } else {
             defaultValue
         }
